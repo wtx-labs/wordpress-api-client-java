@@ -6,7 +6,7 @@ import pl.wtx.wordpress.api.client.invoker.ApiClient;
 import pl.wtx.wordpress.api.client.invoker.JSON;
 
 /**
- * WordPress REST API client ({@code wp/v2}).
+ * WordPress REST API client.
  *
  * @author WTX Labs
  * @see <a href="https://github.com/wtx-labs/wordpress-api-client-java">wordpress-api-client-java</a>

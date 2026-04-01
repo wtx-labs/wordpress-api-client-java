@@ -7,10 +7,10 @@ import pl.wtx.wordpress.api.client.invoker.ApiException;
 import pl.wtx.wordpress.api.client.model.Post;
 
 /**
- * WordPress API Client — minimal usage demo (list posts).
- *
+ * WordPress API client - Usage Demo.
  * @author WTX Labs
- * @see <a href="https://github.com/wtx-labs/wordpress-api-client-java">wordpress-api-client-java</a>
+ * @see https://github.com/wtx-labs//wordpress-api-client-java
+ * @license MIT
  */
 public class WordPressApiClientUsageDemo {
 
