@@ -28,23 +28,26 @@ jobs:
           echo "Setting up GPG..."
           mkdir -p ~/.gnupg
           chmod 700 ~/.gnupg
-
+          
+          # Import private key
           echo "${{ secrets.GPG_PRIVATE_KEY }}" > private.key
           echo "Importing GPG key..."
           gpg --batch --import private.key
           rm private.key
-
+          
+          # Configure GPG
           echo "Configuring GPG..."
           cat > ~/.gnupg/gpg.conf << EOF
           default-key ${{ secrets.GPG_KEYNAME }}
           use-agent
           pinentry-mode loopback
           EOF
-
+          
+          # Debug information
           echo "=== GPG Keys ==="
           gpg --list-secret-keys --keyid-format LONG
           gpg --list-keys --keyid-format LONG
-
+      
       - name: Configure Maven
         run: |
           mkdir -p ~/.m2
@@ -71,7 +74,7 @@ jobs:
             </profiles>
           </settings>
           EOF
-
+      
       - name: Build and Publish
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME_TOKEN }}
