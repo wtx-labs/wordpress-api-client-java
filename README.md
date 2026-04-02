@@ -275,12 +275,6 @@ public class WordPressApiClientUsageDemo {
 - 💡 Have suggestions? Open an Issue or contribute to the project
 - 🌟 Star this repository if you find it helpful!
 
-## 📊 Project statistics
-
-- ⭐ Growing community — star the repo to show support
-- 🔄 Regular updates when the [OpenAPI specification](https://github.com/wtx-labs/wordpress-api-openapi-specification) evolves
-- 👥 Open for community contributions
-
 ## 🔍 Keywords
 
 wordpress java client, wordpress rest api java, java wordpress integration, wordpress api v2 java, wp-json java client, wordpress java library, java rest api client wordpress, wordpress api client library for java, openapi wordpress java
