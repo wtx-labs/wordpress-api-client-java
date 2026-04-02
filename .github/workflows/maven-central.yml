@@ -24,28 +24,44 @@ jobs:
           cache: maven
 
       - name: Setup GPG
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_KEYNAME: ${{ secrets.GPG_KEYNAME }}
         run: |
+          set -euo pipefail
           echo "Setting up GPG..."
           mkdir -p ~/.gnupg
           chmod 700 ~/.gnupg
-          
-          # Import private key
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" > private.key
+
+          if [ -z "${GPG_KEYNAME:-}" ]; then
+            echo "::error::GPG_KEYNAME is empty — set it to the long key ID or fingerprint (no spaces) from gpg --list-secret-keys --keyid-format LONG"
+            exit 1
+          fi
+          if [ -z "${GPG_PRIVATE_KEY:-}" ]; then
+            echo "::error::GPG_PRIVATE_KEY is empty — paste the full armored block (BEGIN/END PGP PRIVATE KEY BLOCK)"
+            exit 1
+          fi
+
+          # Strip CR (Windows line endings break gpg --import)
+          printf '%s\n' "$GPG_PRIVATE_KEY" | tr -d '\r' > private.key
           echo "Importing GPG key..."
           gpg --batch --import private.key
-          rm private.key
-          
-          # Configure GPG
+          rm -f private.key
+
           echo "Configuring GPG..."
           cat > ~/.gnupg/gpg.conf << EOF
-          default-key ${{ secrets.GPG_KEYNAME }}
+          default-key $GPG_KEYNAME
           use-agent
           pinentry-mode loopback
           EOF
-          
-          # Debug information
-          echo "=== GPG Keys ==="
+
+          echo "=== GPG secret keys ==="
           gpg --list-secret-keys --keyid-format LONG
+          if ! gpg --list-secret-keys --keyid-format LONG 2>/dev/null | grep -q '^sec'; then
+            echo "::error::No secret key after import. Use gpg --export-secret-keys (not --export), full private armored block, and matching GPG_KEYNAME."
+            exit 1
+          fi
+          echo "=== GPG public keys ==="
           gpg --list-keys --keyid-format LONG
       
       - name: Configure Maven
