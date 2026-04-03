@@ -39,7 +39,7 @@ This API client provides a type-safe Java interface for WordPress REST API v2, e
 - 🛡️ **Basic authentication** - secure WordPress API access (e.g. username + Application Password)
 - 📚 **Clear documentation** - comprehensive examples for Java integration
 - 🚀 **Wide Java support** - compatible with Java 8 and newer
-- ⚡ **OpenAPI Generated** - based on our [OpenAPI specification](https://github.com/wtx-labs/wordpress-api-openapi-specification); regenerate sources with [`wordpress-api-client-generator`](https://github.com/wtx-labs/wordpress-api-client-generator) when the spec changes
+- ⚡ **OpenAPI Generated** - based on our [OpenAPI specification](https://github.com/wtx-labs/wordpress-api-openapi-specification) developed from official WordPress documentation
 
 - ✅ Posts API
   - List all posts
